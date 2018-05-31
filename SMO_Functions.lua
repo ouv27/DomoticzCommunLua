@@ -1,6 +1,20 @@
 json = (loadfile "/home/pi/domoticz/scripts/lua/SMO_Globals.lua")() 
 Script = '*** SMO_Functions : '
 
+
+-- 10003 : Au lit
+-- 10004 : A toi
+-- 10005 : Grouille
+-- 10006 : Pas touche
+-- 10007 : Les fauteuilles massant sont hyper confortable
+-- 10008 : Les collègues peuvent avoir une bonne écoute
+-- 10009 : Oh Year
+-- 10010 : Ouverture du portail
+-- 10011 : 
+-- 10012 : Le portail est resté ouvert
+-- 10013 : 
+-- 10014 : 
+-- 10015 : 
 function XiaomiGatewayMP3(id)
     commandArray['Variable:XiaomiMP3']=''..id..''
 	if(Debug == 'On') then
