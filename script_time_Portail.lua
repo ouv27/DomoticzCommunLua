@@ -1,5 +1,5 @@
 -- Raspbian path
-json = (loadfile "/home/pi/domoticz/scripts/lua/SMO_Globals.lua")()
+json = (loadfile "/home/pi/domoticz/scripts/lua/SMO_Functions.lua")()
 -- Windows path
 -- json = (loadfile "C:\\Program Files (x86)\\Domoticz\\scripts\\lua\\SMO_Functions.lua")()
 
