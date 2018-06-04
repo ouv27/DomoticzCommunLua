@@ -1,9 +1,10 @@
 -- Raspbian path
 Path = "/home/pi/domoticz/scripts/lua/"
 -- Windows path
-Path = "C:\\Program Files (x86)\\Domoticz\\scripts\\lua\\>"
+-- Path = "C:\\Program Files (x86)\\Domoticz\\scripts\\lua\\>"
 json = (loadfile Path.."SMO_Globals.lua")() 
-Script = '*** SMO_Functions : '
+Version = "V1.0"
+Script = '*** SMO_Functions('..Version..') : '
 
 
 -- 10003 : Au lit
