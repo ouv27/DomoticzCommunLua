@@ -14,8 +14,8 @@ commandArray = {}
 	s = otherdevices_lastupdate['Portail Door Sensor']
 	RtnTime = lastupdateToTime(s)
 	sPortailState = otherdevices['Portail Door Sensor']
-	if ((sPortailState == 'Open' or sPortailState == 'On') and (timenow+DelaisNotificationPortailOuvert>RtnTime)) then
-		SendNotification("XIAOMIGW","10009");
+	if ((sPortailState == 'Open' or sPortailState == 'On') and (timenow>RtnTime+DelaisNotificationPortailOuvert)) then
+		SendNotification("XIAOMIGW","10012");
 	end
 	if(Debug == 'On') then
 		print(Script.."timenow:"..tostring(timenow))
