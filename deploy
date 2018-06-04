@@ -1,0 +1,2 @@
+cp *.lua ../../domoticz/scripts/lua/
+
