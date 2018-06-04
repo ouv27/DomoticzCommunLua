@@ -1,4 +1,6 @@
-json = (loadfile "/home/pi/domoticz/scripts/lua/SMO_Globals.lua")() 
+-- Raspbian path
+Path = "/home/pi/domoticz/scripts/lua/"
+json = (loadfile Path.."SMO_Globals.lua")() 
 Script = '*** SMO_Functions : '
 
 
