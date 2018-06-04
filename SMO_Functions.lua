@@ -1,31 +1,51 @@
 -- Raspbian path
-Path = "/home/pi/domoticz/scripts/lua/"
+json = (loadfile "/home/pi/domoticz/scripts/lua/SMO_Globals.lua")()
 -- Windows path
--- Path = "C:\\Program Files (x86)\\Domoticz\\scripts\\lua\\>"
-json = (loadfile Path.."SMO_Globals.lua")() 
+-- json = (loadfile "C:\\Program Files (x86)\\Domoticz\\scripts\\lua\\SMO_Globals.lua")()
+
 Version = "V1.0"
 Script = '*** SMO_Functions('..Version..') : '
 
+
+function SendNotification(media,msg)
+	if(media=="XIAOMIGW") then
+		XiaomiGatewayMP3(msg)
+	elseif(media=="EMAIL") then
+
+	elseif(media=="PUSHBULLET") then
+	
+	end
+end
 
 -- 10003 : Au lit
 -- 10004 : A toi
 -- 10005 : Grouille
 -- 10006 : Pas touche
--- 10007 : Les fauteuilles massant sont hyper confortable
+-- 10007 : Les fauteuils massant sont hyper confortable
 -- 10008 : Les collègues peuvent avoir une bonne écoute
 -- 10009 : Oh Year
 -- 10010 : Ouverture du portail
 -- 10011 : 
 -- 10012 : Le portail est resté ouvert
--- 10013 : 
--- 10014 : 
--- 10015 : 
 function XiaomiGatewayMP3(id)
     commandArray['Variable:XiaomiMP3']=''..id..''
 	if(Debug == 'On') then
 		print(Script..'XiaomiGatewayMP3 : '..'Xiaomi Gateway will play sound stored on bank '..id)
 	end    
     commandArray['Xiaomi Gateway MP3']='On'
+end
+
+
+-- Convert a date time like 2013-07-11 17:23:12 to os.time format
+function lastupdateToTime(last)
+	year = string.sub(last, 1, 4)
+	month = string.sub(last, 6, 7)
+	day = string.sub(last, 9, 10)
+	hour = string.sub(last, 12, 13)
+	minutes = string.sub(last, 15, 16)
+	seconds = string.sub(last, 18, 19)
+	rtnTime = os.time{year=year, month=month, day=day, hour=hour, min=minutes, sec=seconds}
+	return rtnTime
 end
 
 function os.capture(cmd, raw)

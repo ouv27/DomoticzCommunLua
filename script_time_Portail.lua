@@ -1,45 +1,28 @@
-Debug = 'On'
-Script = '*** script_time_Portail : '
+-- Raspbian path
+json = (loadfile "/home/pi/domoticz/scripts/lua/SMO_Globals.lua")()
+-- Windows path
+-- json = (loadfile "C:\\Program Files (x86)\\Domoticz\\scripts\\lua\\SMO_Functions.lua")()
+
+Version = "V1.0"
+Script = '*** script_time_Portail2('..Version..') : '
+
 if(Debug == 'On') then
                print(Script.."Debug On")
 end
 commandArray = {}
+	timenow = os.time()
+	s = otherdevices_lastupdate['Portail Door Sensor']
+	RtnTime = lastupdateToTime(s)
 	sPortailState = otherdevices['Portail Door Sensor']
-	print(sPortailState)
-	time = uservariables["PortailTimer"]
-	if(Debug == 'On') then
-		print(Script.."sPortailState = "..sPortailState)
-		print(Script.."uservariables[PortailTimer] = "..time)
+	if ((sPortailState == 'Open' or sPortailState == 'On') and (timenow+DelaisNotificationPortailOuvert>RtnTime)) then
+		SendNotification("XIAOMIGW","10009");
 	end
-	if (sPortailState == 'Open' or sPortailState == 'On') then
-		if(time == nil or time == '' or time == "0") then
-			commandArray['Variable:PortailTimer'] = tostring(os.time(now))
-			time = tostring(os.time(now))
-			if(Debug == 'On') then
-				print(Script.."time not set")
-				print(Script.."new time = "..time)
-			end
-		end
-		if(Debug == 'On') then
-			print (Script.."time = "..time)
-			print (Script.."time + 5 minutes = "..time + 5*60-1)
-			print (Script.."now = "..os.time(now))
-		end
-		if(time + 5*60-1 < os.time(now) ) then
-			if(Debug == 'On') then
-			   print(Script.."Alerte")
-			end
-			commandArray['Variable:XiaomiMP3']='10012'
-			if(Debug == 'On') then
-				print(Script..'Xiaomi Gateway will play sound stored on bank 10012')
-			end    
-			commandArray['Xiaomi Gateway MP3']='On'
-		end
-		elseif(time ~= "0") then 
-			commandArray['Variable:PortailTimer'] = "0"
-			if(Debug == 'On') then
-				print (Script.."Portail Closed, reset timer")
-			end
+	if(Debug == 'On') then
+		print(Script.."timenow:"..tostring(timenow))
+		print(Script.."Portail Door Sensor:"..s)
+		print(Script.."RtnTime:"..tostring(RtnTime))
+		print(Script.."DelaisNotificationPortailOuvert:"..tostring(DelaisNotificationPortailOuvert))
+		print(Script.."sPortailState:"..tostring(sPortailState))
 	end
 return commandArray
 
